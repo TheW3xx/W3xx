@@ -1,0 +1,92 @@
+local config = {
+    reach = {
+        studs = 2.75
+    },
+}
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Rex Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest", IntroEnabled = true, IntroText = "REX"})
+
+local Tab = Window:MakeTab({
+	Name = "Settings",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "Execute Reach",
+	Callback = function()
+      		CheckAndTouch()
+  	end    
+})
+
+ Tab:AddButton({
+	Name = "1.45 studs",
+	Callback = function()
+      		config.reach.studs = 1.45
+      		
+  	end    
+})
+ 
+Tab:AddButton({
+	Name = "2.75 studs",
+	Callback = function()
+      		config.reach.studs = 2.75
+      		
+  	end    
+})
+Tab:AddButton({
+	Name = "3 studs",
+	Callback = function()
+      		config.reach.studs = 3
+      		
+  	end    
+})
+
+Tab:AddButton({
+	Name = "4 studs",
+	Callback = function()
+      	config.reach.studs = 4
+      		
+  	end    
+})
+
+Tab:AddButton({
+	Name = "5 studs",
+	Callback = function()
+      		config.reach.studs = 5
+      		
+  	end    
+})
+
+
+local rex = 2.75
+
+local function CheckAndTouch()
+    local player = game.Players.localPlayer
+    local character = player.Character
+    local humanoid = character.FindFirstChild("Humanoid")
+    
+    if humanoid then
+       local rigType = humanoid.RigType
+       local rootPart = character:FindFirstChild("HumanoidRootPart")
+       local preferredFoot = game.Lighting[player.Name;]:FindFirstChild("PreferredFoot")
+       if rigType == Enum.HumanRigType.R6 or rigType == Enum.HumanoidRigType.R15 then
+       local tps = game.Workspace.TPSSystem.TPS
+       if (rootPart.Position - tps.Position) .Magnİtude <= config.reach.studs then
+       if preferredFoot and preferredFoot.Value == 1 then
+       firetouchinterest(character["Right Leg"], tps, 0)
+       firetouchinterest(character["Right Leg"], tps, 1) 
+       elsef preferredFoot and preferredFoot .Value == 2 then
+       firetouchinterest(character["Left Leg"], tps, 0) 
+       firetouchinterest(character["Left Leg"], tps, 1) 
+    end
+end
+ 
+end
+
+end
+
+end
+
+local RenderStepped = game:GetService("RunService").RenderStepped:Connect(CheckAndTouch)
